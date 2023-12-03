@@ -1,7 +1,7 @@
 import numpy as np
 import librosa
 
-# Function to apply splicing forgery
+# Function to apply forgery
 def apply_forgery(original_audio, splice_audio):
     splice_start = np.random.randint(0, len(original_audio))
     spliced_audio = original_audio[:splice_start].copy()
