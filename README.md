@@ -1,6 +1,4 @@
-#########################################
-# Splicing and Copy-Move Data Generator #
-#########################################
+# Splicing and Copy-Move Dataset Generator #
 
 This code consist on a dataset generator that uses the TIMIT dataset and apply splicing and copy-move forgery to each audio.
 The code work as follows:
