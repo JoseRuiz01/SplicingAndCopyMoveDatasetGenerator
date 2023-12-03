@@ -7,5 +7,5 @@ The code work as follows:
 - Substract a random segment from that audio.
 - Select a random point in the original audio.
 - Insert the segment in that point in the original audio.
-- Insert the rest of the original audi after the segment.
+- Insert the rest of the original audio after the segment.
 - Return the spliced audio and save it in to the folder 'SplicingDataset' 
