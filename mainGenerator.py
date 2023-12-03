@@ -5,7 +5,7 @@ from audio_forgery import *
 from load_save import *
 
 # Path to the TIMIT dataset
-timit_path = '/home/jose/src/TIMIT/data/lisa/data/timit/raw/TIMIT'
+timit_path = '/home/jose/src/TFG/TIMIT/data/lisa/data/timit/raw/TIMIT'
 
 
 # Create a new folder for the spliced dataset
