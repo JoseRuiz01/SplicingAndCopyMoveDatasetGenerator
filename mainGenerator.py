@@ -22,7 +22,7 @@ def select_random_segment(audio_file):
     y, sr = librosa.load(audio_file, sr=None)
     total_duration = librosa.get_duration(y=y, sr=sr)
     
-    segment_duration = np.random.uniform(0.3, total_duration-0.3)
+    segment_duration = np.random.uniform(1, total_duration-0.5)
     
     start_time = np.random.uniform(0, total_duration - segment_duration)
     end_time = start_time + segment_duration
@@ -30,11 +30,15 @@ def select_random_segment(audio_file):
     return segment, sr  
 
 # Function to apply splicing forgery
+import numpy as np
+
 def apply_splicing(original_audio, splice_audio):
-    splice_start = np.random.randint(0, len(original_audio) - len(splice_audio))
-    spliced_audio = original_audio.copy()
-    spliced_audio[splice_start:splice_start + len(splice_audio)] = splice_audio
+    splice_start = np.random.randint(0, len(original_audio))
+    spliced_audio = original_audio[:splice_start].copy()
+    spliced_audio = np.concatenate((spliced_audio, splice_audio))
+    spliced_audio = np.concatenate((spliced_audio, original_audio[splice_start + len(splice_audio):]))
     return spliced_audio
+
 
 
 # Create a new folder for the spliced dataset
@@ -45,22 +49,18 @@ os.makedirs(spliced_dataset_path, exist_ok=True)
 # Load TIMIT audio files
 timit_files = load_audio_files(timit_path)
 
-# Outer loop to iterate 5 times
+# Outer loop
 for iteration in range(5):
-    # Inner loop to iterate through TIMIT files
+    # Inner loop
     for original_audio_path in timit_files:
         original_audio, sr = librosa.load(original_audio_path, sr=None)
 
-        # Select a random segment from another TIMIT file
-        splice_audio_path = np.random.choice(timit_files)
-        splice_audio, _ = select_random_segment(splice_audio_path)
-
-        # Ensure that the length of splice_audio is less than original_audio
-        splice_len = len(splice_audio)
-        while splice_len >= len(original_audio):
+        # do-while to select a random segment from another TIMIT file and check that the random segment obtained is lower that the audio to apply forgery
+        while True:
             splice_audio_path = np.random.choice(timit_files)
             splice_audio, _ = select_random_segment(splice_audio_path)
-            splice_len = len(splice_audio)
+
+            if len(splice_audio) < len(original_audio): break
 
         # Apply splicing forgery
         spliced_audio = apply_splicing(original_audio, splice_audio)
