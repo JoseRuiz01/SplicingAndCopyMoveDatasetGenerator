@@ -5,15 +5,15 @@ from audio_forgery import *
 from load_save import *
 
 # Path to the TIMIT dataset
-timit_path = '/home/jose/src/TIMIT/data/lisa/data/timit/raw/TIMIT/TEST'
+timit_path = '/home/jose/src/TIMIT/data/lisa/data/timit/raw/TIMIT'
 
 
 # Create a new folder for the spliced dataset
-spliced_dataset_path = '/home/jose/src/SplicingDataset'
+spliced_dataset_path = '/home/jose/src/TFG/SplicingDataset'
 os.makedirs(spliced_dataset_path, exist_ok=True)
 
 # Create a new folder for the copy move dataset
-copy_move_dataset_path = '/home/jose/src/CopyMoveDataset'
+copy_move_dataset_path = '/home/jose/src/TFG/CopyMoveDataset'
 os.makedirs(copy_move_dataset_path, exist_ok=True)
 
 
