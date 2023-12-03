@@ -29,16 +29,14 @@ def select_random_segment(audio_file):
     segment = y[int(start_time * sr):int(end_time * sr)]
     return segment, sr  
 
-# Function to apply splicing forgery
-import numpy as np
 
+# Function to apply splicing forgery
 def apply_splicing(original_audio, splice_audio):
     splice_start = np.random.randint(0, len(original_audio))
     spliced_audio = original_audio[:splice_start].copy()
     spliced_audio = np.concatenate((spliced_audio, splice_audio))
     spliced_audio = np.concatenate((spliced_audio, original_audio[splice_start + len(splice_audio):]))
     return spliced_audio
-
 
 
 # Create a new folder for the spliced dataset
