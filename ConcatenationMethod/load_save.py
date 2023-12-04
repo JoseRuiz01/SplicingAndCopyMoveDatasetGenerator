@@ -16,15 +16,15 @@ def get_path(audio_filename, dataset_path):
     
 def create_original_dataset_folders():
     # Create a new folder for the original dataset
-    original_dataset_path = '/home/jose/src/TFG/Dataset1/Original_Dataset'
+    original_dataset_path = '/home/jose/src/TFG/DatasetConcatenation/OriginalDataset'
     os.makedirs(original_dataset_path, exist_ok=True)
 
    # Create a new folder for the spliced dataset
-    spliced_dataset_path = '/home/jose/src/TFG/Dataset1/SplicingDataset'
+    spliced_dataset_path = '/home/jose/src/TFG/DatasetConcatenation/SplicingDataset'
     os.makedirs(spliced_dataset_path, exist_ok=True)
 
     # Create a new folder for the copy move dataset
-    copy_move_dataset_path = '/home/jose/src/TFG/Dataset1/CopyMoveDataset'
+    copy_move_dataset_path = '/home/jose/src/TFG/DatasetConcatenation/CopyMoveDataset'
     os.makedirs(copy_move_dataset_path, exist_ok=True)
 
     return original_dataset_path, copy_move_dataset_path, spliced_dataset_path

@@ -9,11 +9,11 @@ timit_path = '/home/jose/src/TFG/TIMIT/data/lisa/data/timit/raw/TIMIT'
 
 
 # Create a new folder for the spliced dataset
-spliced_dataset_path = '/home/jose/src/TFG/SplicingDataset'
+spliced_dataset_path = '/home/jose/src/TFG/DatasetRandomPositionMethod/SplicingDataset'
 os.makedirs(spliced_dataset_path, exist_ok=True)
 
 # Create a new folder for the copy move dataset
-copy_move_dataset_path = '/home/jose/src/TFG/CopyMoveDataset'
+copy_move_dataset_path = '/home/jose/src/TFG/DatasetRandomPositionMethod/CopyMoveDataset'
 os.makedirs(copy_move_dataset_path, exist_ok=True)
 
 
