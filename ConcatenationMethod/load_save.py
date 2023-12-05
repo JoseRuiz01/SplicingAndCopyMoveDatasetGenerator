@@ -14,7 +14,7 @@ def loadAudioFiles(folder_path):
 def getPath(audio_filename, dataset_path):
     return os.path.join(dataset_path, audio_filename)
     
-def create_original_dataset_folders():
+def createDatasetFolders():
     # Create a new folder for the original dataset
     original_dataset_path = '/home/jose/src/TFG/DatasetConcatenation/OriginalDataset'
     os.makedirs(original_dataset_path, exist_ok=True)
