@@ -7,6 +7,8 @@ from load_save import *
 # Path to the TIMIT dataset
 timit_path = '/home/jose/src/TFG/TIMIT/data/lisa/data/timit/raw/TIMIT'
 
+#  umbral percentage
+umbral_percentage = 1.0
 
 # Create a new folder for the spliced dataset
 spliced_dataset_path = '/home/jose/src/TFG/DatasetRandomPositionMethod/SplicingDataset'
@@ -30,19 +32,21 @@ for iteration in range(5):
         # Load Original Audio
         original_audio, sr = librosa.load(original_audio_path, sr=None)
 
+        # Define the minimum umbral to check the difference between two audio segments
+        max_amplitude = np.max(np.abs(original_audio))
+        umbral = umbral_percentage / 100 * max_amplitude
 
         # Select segments for splicing and copyMove
         while True:
             splice_audio_path = np.random.choice(timit_files)
             splice_segment, _ = select_random_segment(splice_audio_path)
-            if len(splice_segment) < len(original_audio): break
+            if len(splice_segment) < len(original_audio) & checkRMSDifference(splice_segment, original_audio, umbral): break
 
         copy_move_segment, _ = select_random_segment(original_audio_path)
 
         # Apply forgery
         spliced_audio = apply_forgery(original_audio, splice_segment)
         copy_move_audio = apply_forgery(original_audio, copy_move_segment)
-
 
         # Save the audio
         spliced_audio_path = save_files(original_audio_path, iteration, spliced_dataset_path)

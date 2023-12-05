@@ -20,3 +20,9 @@ def select_random_segment(audio_file):
     end_time = start_time + segment_duration
     segment = y[int(start_time * sr):int(end_time * sr)]
     return segment, sr  
+
+# Calculate the RMS (Root Mean Square) between the two segments to tell if they are different
+def checkRMSDifference(audio1, audio2, umbral):
+    min_length = min(len(audio1), len(audio2))
+    rms_difference = np.sqrt(np.mean((audio1[:min_length] - audio2[:min_length])**2))
+    return rms_difference > umbral
