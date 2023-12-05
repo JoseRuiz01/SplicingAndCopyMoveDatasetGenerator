@@ -1,14 +1,8 @@
 # Splicing and Copy-Move Dataset Generator #
 
-This code consist on a dataset generator that uses the TIMIT dataset and apply splicing and copy-move forgery to each audio.
+This code consist on 2 different dataset generators that use the TIMIT dataset and apply splicing and copy-move forgery to each audio.
 The code work as follows:
-- Iterate through each audio file from the TIMIT dataset.
-    - For splicing: Select a random audio from the same dataset.
-    - For Splicing: Substract a random segment from that audio.
-    
-    - For Copy-move: subtract a random segment from the same original audio.
-
-- Select a random point in the original audio.
-- Insert the segment in that point in the original audio.
-- Insert the rest of the original audio after the segment.
-- Return the forgered audio and save it in to the folders dataset
+- FIRST METHOD:
+    For each audio substract a random segment from that audio and select a random point to insert the segment in that point, then insert the rest of the original audio after the segment.
+- SECOND METHOD (Based on the paper: 'Autoencoder for foregery detection'):
+    For each audio substract segments of 2s and 1s and concatenate them in different ways so that we create for each original audio 3s and 2s forgered audios.
