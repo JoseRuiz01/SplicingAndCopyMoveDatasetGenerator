@@ -1,10 +1,8 @@
 import numpy as np
 import librosa
 
-umbral_porcentaje = 1.0
-
 # Function to select a random segment 
-def select_random_segment(audio, sr, segment_duration):
+def selectRandomSegment(audio, sr, segment_duration):
     total_duration = librosa.get_duration(y=audio, sr=sr)
 
     start_time = np.random.uniform(0, total_duration - segment_duration)
@@ -12,28 +10,50 @@ def select_random_segment(audio, sr, segment_duration):
     segment = audio[int(start_time * sr):int(end_time * sr)]
     return segment  
 
-def concatenateAudios(D2s_segment, D1s_segment):
+def concatenateAudios(original_segment, forged_segment, sr, time):
+    # Save audios concatenated
     audios = []
-    audios.append(np.concatenate((D2s_segment[:1], D1s_segment, D2s_segment[1:])))
-    audios.append(np.concatenate((D2s_segment, D1s_segment)))
-    audios.append(np.concatenate((D1s_segment, D2s_segment)))
+    audios.append(np.concatenate((original_segment[:int(sr * time)], forged_segment, original_segment[int(sr * time):])))
+    audios.append(np.concatenate((original_segment, forged_segment)))
+    audios.append(np.concatenate((forged_segment, original_segment)))
     return  audios
 
-def get_forgered_audios(audio1, audio2, umbral, sr1, sr2):
-    # Define the minimum umbral 
-    forgered_audios = []
-    D2s_segment = select_random_segment(audio1, sr1, 2)
+def getForgeredAudios(audio, forged_segment_1, forged_segment_2, sr):
+    original_segment_2sec = selectRandomSegment(audio, sr, 2)
+    original_segment_1sec = selectRandomSegment(audio, sr, 1)
+    audios = concatenateAudios(original_segment_2sec, forged_segment_1, sr, 1)
+    audios.extend(concatenateAudios(original_segment_1sec, forged_segment_2, sr, 0.5))
+    return audios
 
+def checkRMSDifference(audio1, audio2, umbral):
+    # Calculate the RMS (Root Mean Square) between the two segments to tell if they are different
+    min_length = min(len(audio1), len(audio2))
+    rms_difference = np.sqrt(np.mean((audio1[:min_length] - audio2[:min_length])**2))
+    return rms_difference > umbral
+
+
+def getSplicingSegment(original_audio, timit_files, umbral):
     while True:
-        D1s_segment_1 = select_random_segment(audio2, sr2, 1)
-        D1s_segment_2 = select_random_segment(audio2, sr2, 1)
-        # Calculate the RMS (Root Mean Square) between the two segments to tell if they are different
-        rms_difference = np.sqrt(np.mean((D1s_segment_1 - D1s_segment_2)**2))
-        # CHeck if the RMS (Root Mean Square) is greater than the defined umbral (1%)
-        if rms_difference > umbral: break
+        # Load a random audio file from timit_files
+        splice_audio, sr_splice = librosa.load(np.random.choice(timit_files), sr=None)
+        # Length of splice_audio matches the length of original_audio
+        if checkRMSDifference(splice_audio, original_audio, umbral): break
+    return splice_audio, sr_splice
 
-    forgered_audios = concatenateAudios(D2s_segment, D1s_segment_1)
-    forgered_audios.extend(concatenateAudios(D2s_segment, D1s_segment_2))
 
-    return forgered_audios
+def getD1sSegmentsForSplicing(original_audio, timit_files, umbral):
+    splicing_audio1, sr_splicing1 = getSplicingSegment(original_audio, timit_files, umbral)
+    splicing_audio2, sr_splicing2 = getSplicingSegment(original_audio, timit_files, umbral)
+    while True:
+        D1s_segment_1 = selectRandomSegment(splicing_audio1, sr_splicing1, 1)
+        D1s_segment_2 = selectRandomSegment(splicing_audio2, sr_splicing2, 1)
+        if checkRMSDifference(D1s_segment_1, D1s_segment_2, umbral): break
+    return D1s_segment_1, D1s_segment_2
 
+
+def getD1sSegmentsForCopyMove(original_audio, sr, umbral):
+    while True:
+        D1s_segment_1 = selectRandomSegment(original_audio, sr, 1)
+        D1s_segment_2 = selectRandomSegment(original_audio, sr, 1)
+        if checkRMSDifference(D1s_segment_1, D1s_segment_2, umbral): break
+    return D1s_segment_1, D1s_segment_2
