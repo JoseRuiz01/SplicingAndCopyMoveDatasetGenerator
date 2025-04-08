@@ -54,9 +54,9 @@ This method simulates **forgeries** by:
 ## 📂 Output
 
 For each original audio file, this tool will generate:
-- Authentic audio
-- Copy-move forgeries (via RandomPosition)
-- Splicing forgeries (via Concatenation)
+- Original audio dataset
+- Copy-move forgeries dataset 
+- Splicing forgeries dataset 
 
 ---
 
