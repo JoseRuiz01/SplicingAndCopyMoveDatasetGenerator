@@ -10,7 +10,7 @@ The dataset generation process involves applying transformations to authentic au
 
 ### 🔀 1. <span style="color:#3498db">RandomPosition Method</span>
 
-Simulates a **copy-move forgery** by:
+Simulates **forgeries** by:
 - Selecting a **random segment** from the original audio.
 - Inserting that segment at a **random new position**.
 - Reconstructing the audio so that the inserted segment appears naturally within the waveform.
@@ -31,7 +31,7 @@ Based on the paper:
 📄 *Shaikh et al., 2021*  
 [Read the paper here](https://arxiv.org/abs/2109.06665)
 
-This method:
+This method simulates **forgeries** by:
 - Extracts **2-second and 1-second segments** from each audio file.
 - **Concatenates** them in different combinations to simulate forged samples.
 - Produces:
