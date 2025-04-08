@@ -20,7 +20,7 @@ Simulates **forgeries** by:
 
 Original A: `---[Original Audio A]`
 Original B: `---[Original Audio B]---`  
-Forgery: `---[Original Segment from A]---[Copied Segment from B]---[Remaining A]---`
+Forgery: `---[Segment from A]---[Segment from B]---[Remaining A]---`
 </details>
 
 ---
@@ -42,10 +42,10 @@ This method simulates **forgeries** by:
 <details>
 <summary>📌 Forgery Sample Generation</summary>
 
-- Forgery: `2s [Original Segment from A] + 1s [Copied Segment from B] → 3s [Forgered Audio]` 
-- Forgery: `1s [Original Segment from A] + 1s [Copied Segment from B] → 2s [Forgered Audio]` 
-- Forgery: `1s [Original Segment from A] + 1s [Copied Segment from B] + 1s [Original Segment from A] → 3s [Forgered Audio]` 
-- Forgery: `0.5s [Original Segment from A] + 1s [Copied Segment from B] + 0.5s [Original Segment from A] → 2s [Forgered Audio]` 
+- Forgery: `2s [Segment from A] + 1s [Segment from B] → 3s [Forgered Audio]` 
+- Forgery: `1s [Segment from A] + 1s [Segment from B] → 2s [Forgered Audio]` 
+- Forgery: `1s [Segment from A] + 1s [Segment from B] + 1s [Segment from A] → 3s [Forgered Audio]` 
+- Forgery: `0.5s [Segment from A] + 1s [Segment from B] + 0.5s [Segment from A] → 2s [Forgered Audio]` 
 
 </details>
 
