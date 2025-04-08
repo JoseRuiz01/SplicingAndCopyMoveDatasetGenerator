@@ -36,8 +36,8 @@ This method simulates **forgeries** by:
 - Extracts **2-second and 1-second segments** from each audio file.
 - **Concatenates** them in different combinations to simulate forged samples.
 - Produces:
-  - **3-second spliced audio**
-  - **2-second spliced audio**
+  - **3-second forgered audio**
+  - **2-second forgered audio**
 
 <details>
 <summary>📌 Forgery Sample Generation</summary>
