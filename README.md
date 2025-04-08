@@ -16,10 +16,11 @@ Simulates **forgeries** by:
 - Reconstructing the audio so that the inserted segment appears naturally within the waveform.
 
 <details>
-<summary>📌 Example (simplified)</summary>
+<summary>📌 Forgery Sample Generation</summary>
 
-Original: `---[Original Segment A]---[Original Segment B]---`  
-Forgery: `---[Original Segment A]---[Copied Segment from B]---[Remaining B]---`
+Original A: `---[Original Audio A]`
+Original B: `---[Original Audio B]---`  
+Forgery: `---[Original Segment from A]---[Copied Segment from B]---[Remaining A]---`
 </details>
 
 ---
@@ -41,8 +42,11 @@ This method simulates **forgeries** by:
 <details>
 <summary>📌 Forgery Sample Generation</summary>
 
-- Take `2s + 1s = 3s` → Spliced audio sample  
-- Take `1s + 1s = 2s` → Another spliced sample
+- Forgery: `2s [Original Segment from A] + 1s [Copied Segment from B] → 3s [Forgered Audio]` 
+- Forgery: `1s [Original Segment from A] + 1s [Copied Segment from B] → 2s [Forgered Audio]` 
+- Forgery: `1s [Original Segment from A] + 1s [Copied Segment from B] + 1s [Original Segment from A] → 3s [Forgered Audio]` 
+- Forgery: `0.5s [Original Segment from A] + 1s [Copied Segment from B] + 0.5s [Original Segment from A] → 2s [Forgered Audio]` 
+
 </details>
 
 ---
